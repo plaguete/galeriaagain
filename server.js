@@ -1,26 +1,22 @@
 // server.js
 
 // --- 1. Importação das Bibliotecas ---
-// Importa o framework Express para criar o servidor.
 const express = require('express');
-// Importa as funções 'put' (para upload) e 'list' (para listar) do SDK do Vercel Blob.
-const { put, list } = require('@vercel/blob');
-// Importa a biblioteca dotenv para carregar variáveis de ambiente do arquivo .env.
+const { put, list, del } = require('@vercel/blob');
 const dotenv = require('dotenv');
-// Importa o módulo 'path' do Node.js para lidar com caminhos de arquivos.
 const path = require('path');
 
 // --- 2. Configuração Inicial ---
-// Carrega as variáveis definidas no arquivo .env para process.env.
 dotenv.config();
-// Cria uma instância do aplicativo Express.
 const app = express();
+
+// Middleware para parsear JSON
+app.use(express.json({ limit: '10mb' }));
 
 // --- 3. Definição das Rotas da API ---
 
 // Rota para UPLOAD de arquivos (método POST)
 app.post('/api/upload', async (req, res) => {
-  // O nome do arquivo é enviado pelo frontend através de um cabeçalho personalizado.
   const filename = req.headers['x-vercel-filename'];
 
   if (!filename) {
@@ -28,15 +24,11 @@ app.post('/api/upload', async (req, res) => {
   }
 
   try {
-    // A função 'put' do @vercel/blob faz todo o trabalho pesado.
-    // Ela recebe o nome do arquivo, o corpo da requisição (o arquivo em si) e opções.
     const blob = await put(filename, req, {
-      access: 'public', // Define o acesso como público para que qualquer um possa ver a imagem.
+      access: 'public',
     });
 
-    // Retorna os metadados do arquivo enviado (incluindo a URL) como resposta.
     res.status(200).json(blob);
-
   } catch (error) {
     console.error('Erro no upload:', error);
     res.status(500).json({ message: 'Erro ao fazer upload do arquivo.', error: error.message });
@@ -46,9 +38,7 @@ app.post('/api/upload', async (req, res) => {
 // Rota para LISTAR os arquivos da galeria (método GET)
 app.get('/api/files', async (req, res) => {
   try {
-    // A função 'list()' busca todos os metadados dos arquivos no seu Blob store.
     const { blobs } = await list();
-    // Retornamos a lista de arquivos como JSON.
     res.status(200).json(blobs);
   } catch (error) {
     console.error('Erro ao listar arquivos:', error);
@@ -56,15 +46,60 @@ app.get('/api/files', async (req, res) => {
   }
 });
 
+// Rota para EXCLUIR um arquivo (método DELETE)
+app.delete('/api/delete', async (req, res) => {
+  const { url } = req.body;
+
+  if (!url) {
+    return res.status(400).json({ message: 'A URL do arquivo é obrigatória.' });
+  }
+
+  try {
+    await del(url);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Erro ao excluir:', error);
+    res.status(500).json({ message: 'Erro ao excluir o arquivo.', error: error.message });
+  }
+});
+
+// Rota para RENOMEAR um arquivo (método POST)
+app.post('/api/rename', async (req, res) => {
+  const { url, newFilename } = req.body;
+
+  if (!url || !newFilename) {
+    return res.status(400).json({ message: 'A URL e o novo nome são obrigatórios.' });
+  }
+
+  try {
+    // 1. Baixar o blob existente
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Falha ao baixar o blob: ${response.statusText}`);
+    }
+    
+    const blobData = await response.arrayBuffer();
+    
+    // 2. Fazer upload do blob com o novo nome
+    const newBlob = await put(newFilename, blobData, {
+      access: 'public',
+    });
+    
+    // 3. Excluir o blob antigo
+    await del(url);
+    
+    res.status(200).json(newBlob);
+  } catch (error) {
+    console.error('Erro ao renomear:', error);
+    res.status(500).json({ message: 'Erro ao renomear o arquivo.', error: error.message });
+  }
+});
+
 // --- 4. Servindo o Frontend ---
-// Middleware do Express que serve arquivos estáticos (HTML, CSS, JS do cliente)
-// da pasta 'public'. Isso é importante para o teste local.
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --- 5. Inicialização do Servidor ---
-// Define a porta do servidor. Usa a porta definida no ambiente ou 3000 como padrão.
 const PORT = process.env.PORT || 3000;
-// Inicia o servidor e o faz "escutar" por requisições na porta definida.
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

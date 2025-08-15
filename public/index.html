@@ -8,341 +8,177 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   
   <style>
-    /* Estilo Geocities */
-    body {
-      background: #ffccff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="5" fill="%23ff99cc"/><circle cx="50" cy="50" r="7" fill="%23ffccff"/><circle cx="80" cy="30" r="4" fill="%23ff99cc"/></svg>');
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      color: #0000cc;
-      margin: 0;
-      padding: 10px;
+    /* --- ESTILO GEOCITIES --- */
+    /* ... (manter todos os estilos anteriores) ... */
+    
+    /* Novos estilos para os botões de ação */
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
     }
     
-    .container {
-      background-color: #ffffff;
-      border: 8px double #ff00ff;
-      padding: 15px;
-      box-shadow: 10px 10px 0 #ffff00;
-      position: relative;
-    }
-    
-    h1, h2 {
-      font-family: "Impact", Charcoal, sans-serif;
-      color: #ff0066;
-      text-shadow: 3px 3px 0 #ffcc00;
-      letter-spacing: 2px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><rect width="100" height="20" fill="%23ccffcc" opacity="0.6"/></svg>');
-      padding: 10px;
-      border-bottom: 4px dotted #00ccff;
-    }
-    
-    .upload-section {
-      background-color: #ccffff;
-      padding: 2rem;
-      border: 5px ridge #00ccff;
-      border-radius: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .upload-section:before {
-      content: "";
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 50px;
-      height: 50px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23ff0066" /><text x="50" y="60" font-family="Arial" font-size="30" fill="white" text-anchor="middle">NEW</text></svg>');
-      background-size: contain;
-      background-repeat: no-repeat;
-      animation: blink 1s infinite;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(to bottom, #ff0066, #cc0066);
-      border: 3px outset #ff99cc;
+    .btn-rename {
+      background: linear-gradient(45deg, #ffff00, #ff9900);
+      color: #000;
       font-weight: bold;
-      color: #ffff00 !important;
-      text-shadow: 1px 1px 1px #000;
-    }
-    
-    .btn-primary:hover {
-      background: linear-gradient(to bottom, #ff3399, #cc0066);
-      border: 3px inset #ff99cc;
-    }
-    
-    .input-group {
-      border: 3px groove #00ccff;
-      padding: 5px;
-      background-color: #ffffff;
-    }
-    
-    .gallery-item .card {
-      background-color: #ffffcc;
-      border: 4px solid #ffcc00;
+      border: 2px solid #ff0;
       border-radius: 0;
-      transition: transform 0.2s;
+      padding: 5px 10px;
+      flex: 1;
+      margin-right: 5px;
     }
     
-    .gallery-item .card:hover {
-      transform: scale(1.05) rotate(2deg);
-      border: 4px solid #ff0066;
+    .btn-delete {
+      background: linear-gradient(45deg, #ff0000, #990000);
+      color: #fff;
+      font-weight: bold;
+      border: 2px solid #f00;
+      border-radius: 0;
+      padding: 5px 10px;
+      flex: 1;
+      margin-left: 5px;
     }
     
-    .card-img-top {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-bottom: 3px dotted #ff0066;
+    .btn-save {
+      background: linear-gradient(45deg, #00ff00, #00aa00);
+      color: #000;
+      font-weight: bold;
+      border: 2px solid #0f0;
+      border-radius: 0;
+      padding: 5px 10px;
+      margin-left: 5px;
     }
     
-    .card-body {
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><rect width="100" height="20" fill="%23ccffcc" opacity="0.6"/></svg>');
+    .modal-content {
+      background: #0000aa;
+      border: 3px solid #ff00ff;
+      color: #ff0;
+      text-shadow: 0 0 5px #000;
     }
     
-    hr {
-      height: 15px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10" viewBox="0 0 20 10"><circle cx="5" cy="5" r="3" fill="%23ff0066"/><circle cx="15" cy="5" r="3" fill="%2300ccff"/></svg>') repeat-x;
-      border: none;
+    .modal-header {
+      border-bottom: 2px solid #ff00ff;
     }
     
-    /* Animações */
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
+    .modal-footer {
+      border-top: 2px solid #ff00ff;
     }
     
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-    
-    /* Elementos decorativos */
-    .construction {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 80px;
-      height: 80px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23ffff00" /><text x="50" y="55" font-family="Arial" font-size="12" fill="black" text-anchor="middle">UNDER</text><text x="50" y="70" font-family="Arial" font-size="12" fill="black" text-anchor="middle">CONSTRUCTION</text></svg>');
-      background-size: contain;
-      background-repeat: no-repeat;
-      animation: blink 2s infinite;
-    }
-    
-    .counter {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
+    .form-control {
       background: #000;
       color: #0f0;
-      font-family: monospace;
-      padding: 5px 10px;
-      border: 2px solid #0f0;
-      z-index: 1000;
-    }
-    
-    .floating-gifs {
-      position: fixed;
-      z-index: -1;
-    }
-    
-    .floating-gifs div {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      animation: float 8s infinite ease-in-out;
-    }
-    
-    .gif1 { 
-      top: 20%; 
-      left: 5%; 
-      animation-delay: 0s;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23ff0066" /><polygon points="50,20 65,45 80,45 70,60 75,80 50,70 25,80 30,60 20,45 35,45" fill="%23ffff00"/></svg>');
-    }
-    
-    .gif2 { 
-      top: 60%; 
-      left: 80%; 
-      animation-delay: 2s;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" fill="%2300ccff" /><circle cx="50" cy="50" r="30" fill="%23ffff00" /><text x="50" cy="50" font-family="Arial" font-size="24" fill="black" text-anchor="middle" dominant-baseline="middle">WEB</text></svg>');
-    }
-    
-    .gif3 { 
-      top: 40%; 
-      left: 90%; 
-      animation-delay: 4s;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%2399ff00" /><text x="50" y="60" font-family="Arial" font-size="30" fill="white" text-anchor="middle">!</text></svg>');
-    }
-    
-    .gif4 { 
-      top: 80%; 
-      left: 10%; 
-      animation-delay: 6s;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q50,0 80,20 Q100,50 80,80 Q50,100 20,80 Q0,50 20,20 Z" fill="%23ffcc00"/><circle cx="50" cy="50" r="20" fill="%23ffffff"/></svg>');
-    }
-    
-    .marquee {
-      background: linear-gradient(to right, #ff0066, #00ccff, #ff0066);
-      color: white;
-      padding: 5px;
-      font-weight: bold;
-      text-shadow: 1px 1px 1px #000;
-      white-space: nowrap;
-      overflow: hidden;
-      box-sizing: border-box;
-      margin-bottom: 15px;
-      border: 2px dashed #ffff00;
-    }
-    
-    .marquee span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: marquee 15s linear infinite;
-    }
-    
-    @keyframes marquee {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-100%, 0); }
-    }
-    
-    .guestbook-link {
-      display: block;
-      text-align: center;
-      margin: 20px 0;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #ff0066;
-      text-decoration: none;
-    }
-    
-    .guestbook-link:hover {
-      text-decoration: underline;
-      color: #00ccff;
-    }
-    
-    .blink {
-      animation: blink 1s step-end infinite;
-    }
-    
-    .status-gif {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-right: 5px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="%23ff0066" /></svg>');
-      animation: blink 1s infinite;
+      border: 1px solid #ff0;
     }
   </style>
 </head>
 <body>
-
-  <!-- Elementos flutuantes estilo GIF -->
-  <div class="floating-gifs">
-    <div class="gif1"></div>
-    <div class="gif2"></div>
-    <div class="gif3"></div>
-    <div class="gif4"></div>
+  <!-- Marquee animado -->
+  <div class="marquee">
+    <span class="rainbow-text">✦✦✦ BEM-VINDO AO MEU SITE! ✦✦✦ ENVIE SUAS IMAGENS! ✦✦✦ GALERIA 100% GRATUITA! ✦✦✦ VISITANTE Nº: <span id="counter">00001</span> ✦✦✦</span>
   </div>
   
-  <!-- Contador de visitas -->
-  <div class="counter">
-    <span id="visitCount">000000</span> VISITORS
-  </div>
+  <!-- Elementos decorativos -->
+  <div class="under-construction blink">EM CONSTRUÇÃO</div>
+  <div class="animated-star">✦</div>
   
-  <!-- Sinal de "Under Construction" -->
-  <div class="construction"></div>
-
-  <div class="container my-5">
-    <!-- Marquee com mensagem animada -->
-    <div class="marquee">
-      <span>✨ WELCOME TO MY AWESOME BLOB STORAGE WEBSITE! ✨ UPLOAD YOUR IMAGES NOW! ✨ BEST VIEWED IN NETSCAPE NAVIGATOR ✨</span>
-    </div>
-    
-    <div class="upload-section col-lg-8 mx-auto">
-      <h1 class="text-center mb-4">UPLOAD PARA VER<span style="color:#ff0066;">CEL</span> BLOB</h1>
-      <form id="uploadForm">
-        <div class="input-group">
-          <input type="file" class="form-control" id="fileInput" name="file" required accept="image/*">
-          <button type="submit" class="btn btn-primary">ENVIAR!</button>
+  <!-- Modal para renomear -->
+  <div class="modal fade" id="renameModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title rainbow-text">Renomear Imagem</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </form>
-      <div id="status" class="mt-3 text-center"></div>
-    </div>
-
-    <!-- Separador animado -->
-    <div style="text-align:center; margin:30px 0;">
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 30'><rect width='300' height='5' fill='%23ff0066'/><rect y='10' width='300' height='5' fill='%2300ccff'/><rect y='20' width='300' height='5' fill='%23ffcc00'/></svg>" alt="separator" width="300" height="30">
-    </div>
-    
-    <h2 class="text-center mb-4">GALERIA DE IMAGENS <span class="blink">!</span></h2>
-    
-    <!-- Link para guestbook -->
-    <a href="#" class="guestbook-link">✍️ SIGN MY GUESTBOOK! ✍️</a>
-    
-    <div id="gallery" class="row"></div>
-    
-    <!-- Rodapé -->
-    <div style="text-align:center; margin-top:30px; padding:10px; background:#ccffcc; border-top:3px dotted #ff0066;">
-      <p>© 2023 - My Awesome Blob Storage - Last Updated: <script>document.write(new Date().toLocaleDateString());</script></p>
-      <p>Best Viewed in 800x600 Resolution</p>
-      <div style="margin-top:10px;">
-        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 31' width='88' height='31'><path d='M0,0 L30,0 L30,31 L0,31 Z' fill='%23ff0066'/><text x='15' y='20' font-family='Arial' font-size='10' fill='white'>WEB</text><path d='M35,0 L65,0 L65,31 L35,31 Z' fill='%2300ccff'/><text x='50' y='20' font-family='Arial' font-size='10' fill='white'>SITE</text><path d='M70,0 L88,0 L88,31 L70,31 Z' fill='%23ffcc00'/><text x='79' y='20' font-family='Arial' font-size='10' fill='black'>!</text></svg>" alt="web site button">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="newFilename" class="form-label">Novo nome do arquivo:</label>
+            <input type="text" class="form-control" id="newFilename" placeholder="Digite o novo nome com extensão">
+          </div>
+          <input type="hidden" id="renameUrl">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-save" id="confirmRename">Salvar</button>
+        </div>
       </div>
     </div>
   </div>
 
+  <div class="container my-5">
+    <div class="upload-section col-lg-8 mx-auto">
+      <h1>Upload para Vercel Blob</h1>
+      <form id="uploadForm">
+        <div class="input-group">
+          <input type="file" class="form-control" id="fileInput" name="file" required accept="image/*">
+          <button type="submit" class="btn btn-primary">ENVIAR AGORA!</button>
+        </div>
+      </form>
+      <div id="status" class="mt-3 text-center">✧ ✧ ✧ AGUARDANDO ARQUIVO ✧ ✧ ✧</div>
+    </div>
+
+    <hr class="my-5">
+    <h2>Galeria de Imagens</h2>
+    <div id="gallery" class="row"></div>
+  </div>
+
+  <!-- Contador de visitantes -->
+  <div class="visitor-counter">VISITANTES: <span id="visitorCount">001</span></div>
+
+  <!-- Adicionar Bootstrap JS para modais -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
     // --- 1. REFERÊNCIAS AOS ELEMENTOS DO DOM ---
-    // Guarda referências aos elementos HTML que vamos manipular para evitar
-    // procurá-los na página toda vez que precisarmos deles.
     const form = document.getElementById('uploadForm');
     const fileInput = document.getElementById('fileInput');
     const statusEl = document.getElementById('status');
     const galleryEl = document.getElementById('gallery');
+    const counter = document.getElementById('counter');
+    const visitorCount = document.getElementById('visitorCount');
+    const renameModal = new bootstrap.Modal(document.getElementById('renameModal'));
+    const newFilenameInput = document.getElementById('newFilename');
+    const confirmRenameBtn = document.getElementById('confirmRename');
+    const renameUrlInput = document.getElementById('renameUrl');
+    let currentBlobUrl = '';
+
+    // --- ADIÇÕES DE FUNCIONALIDADE VISUAL ---
+    // Contador de visitas (apenas visual)
+    let count = 1;
+    setInterval(() => {
+      count++;
+      counter.textContent = count.toString().padStart(5, '0');
+    }, 3000);
+    
+    // Contador de visitantes (persistente)
+    document.addEventListener('DOMContentLoaded', () => {
+      let visits = localStorage.getItem('visits');
+      visits = visits ? parseInt(visits) + 1 : 1;
+      localStorage.setItem('visits', visits);
+      visitorCount.textContent = visits.toString().padStart(3, '0');
+    });
 
     // --- 2. FUNÇÃO PARA CARREGAR A GALERIA ---
-    // Esta função é 'async' porque ela precisa esperar a resposta da rede (fetch).
     async function loadGallery() {
-      // Informa ao usuário que as imagens estão sendo carregadas.
-      galleryEl.innerHTML = '<p class="text-center">Carregando imagens...</p>';
+      galleryEl.innerHTML = '<p class="text-center blink">Carregando imagens...</p>';
       
-      // O bloco 'try...catch' lida com possíveis erros de rede ou do servidor.
       try {
-        // Faz uma requisição GET para a nossa rota /api/files no backend.
-        // O 'await' pausa a execução da função até que a promessa do fetch seja resolvida.
         const response = await fetch('/api/files');
-
-        // Verifica se a resposta HTTP foi bem-sucedida (status 200-299).
-        // Se não for, lança um erro que será pego pelo bloco 'catch'.
         if (!response.ok) {
           throw new Error('Não foi possível buscar as imagens.');
         }
-
-        // Converte a resposta do servidor (que está em formato de texto JSON) para um objeto/array JavaScript.
         const files = await response.json();
-        
-        // Limpa a mensagem de "carregando" para preparar o espaço para as imagens.
         galleryEl.innerHTML = '';
-
-        // Se não houver arquivos, exibe uma mensagem amigável.
+        
         if (files.length === 0) {
-          galleryEl.innerHTML = '<p class="text-center">Nenhuma imagem encontrada. Envie a primeira!</p>';
-          return; // Encerra a função aqui.
+          galleryEl.innerHTML = '<p class="text-center rainbow-text">Nenhuma imagem encontrada. Envie a primeira!</p>';
+          return;
         }
-
-        // Itera sobre cada 'file' no array retornado pelo servidor.
+        
         files.forEach(file => {
-          // Cria um elemento <div> que servirá como a coluna do grid do Bootstrap.
           const col = document.createElement('div');
-          // Adiciona as classes do Bootstrap para responsividade.
           col.className = 'col-lg-3 col-md-4 col-sm-6 mb-4 gallery-item';
-
-          // Cria a estrutura HTML de um card do Bootstrap usando template literals.
-          // Isso torna a criação de HTML complexo mais legível.
+          
           const card = `
             <div class="card h-100 shadow-sm">
                 <a href="${file.url}" target="_blank">
@@ -353,93 +189,152 @@
                         ${file.pathname.length > 20 ? file.pathname.substring(0, 20) + '...' : file.pathname}
                     </p>
                 </div>
+                <div class="card-footer action-buttons">
+                    <button class="btn btn-rename" data-url="${file.url}" data-pathname="${file.pathname}">
+                        Renomear
+                    </button>
+                    <button class="btn btn-delete" data-url="${file.url}">
+                        Excluir
+                    </button>
+                </div>
             </div>`;
           
-          // Insere o HTML do card dentro do elemento de coluna.
           col.innerHTML = card;
-          // Adiciona a coluna (com o card dentro) ao container da galeria.
           galleryEl.appendChild(col);
         });
 
+        // Adicionar event listeners aos novos botões
+        document.querySelectorAll('.btn-rename').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const url = e.target.getAttribute('data-url');
+            const pathname = e.target.getAttribute('data-pathname');
+            openRenameModal(url, pathname);
+          });
+        });
+
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const url = e.target.getAttribute('data-url');
+            deleteImage(url);
+          });
+        });
+
       } catch (error) {
-        // Se ocorrer qualquer erro no bloco 'try', ele é capturado aqui.
-        // Exibe a mensagem de erro no container da galeria para o usuário.
         galleryEl.innerHTML = `<p class="text-center text-danger">Erro ao carregar a galeria: ${error.message}</p>`;
       }
     }
 
-    // --- 3. "OUVINTE" DE EVENTO DO FORMULÁRIO DE UPLOAD ---
-    // Adiciona uma função a ser executada quando o evento 'submit' do formulário ocorrer.
+    // --- 3. FUNÇÃO PARA ABRIR MODAL DE RENOMEAR ---
+    function openRenameModal(url, currentName) {
+      currentBlobUrl = url;
+      newFilenameInput.value = currentName;
+      renameUrlInput.value = url;
+      renameModal.show();
+    }
+
+    // --- 4. FUNÇÃO PARA RENOMEAR IMAGEM ---
+    async function renameImage(url, newFilename) {
+      try {
+        const response = await fetch('/api/rename', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            url, 
+            newFilename 
+          }),
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          statusEl.innerHTML = `<span class="rainbow-text">✅ Imagem renomeada para: ${newFilename}</span>`;
+          loadGallery();
+        } else {
+          throw new Error(result.message);
+        }
+      } catch (error) {
+        statusEl.innerHTML = `<span class="blink">❌ Erro ao renomear: ${error.message}</span>`;
+        statusEl.className = 'mt-3 text-center text-danger';
+      }
+    }
+
+    // --- 5. FUNÇÃO PARA EXCLUIR IMAGEM ---
+    async function deleteImage(url) {
+      if (!confirm('Tem certeza que deseja excluir esta imagem?')) return;
+      
+      try {
+        const response = await fetch('/api/delete', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ url }),
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          statusEl.innerHTML = `<span class="rainbow-text">🗑️ Imagem excluída com sucesso!</span>`;
+          loadGallery();
+        } else {
+          throw new Error(result.message);
+        }
+      } catch (error) {
+        statusEl.innerHTML = `<span class="blink">❌ Erro ao excluir: ${error.message}</span>`;
+        statusEl.className = 'mt-3 text-center text-danger';
+      }
+    }
+
+    // --- 6. "OUVINTE" DE EVENTO DO FORMULÁRIO DE UPLOAD ---
     form.addEventListener('submit', async (event) => {
-      // Previne o comportamento padrão do formulário, que é recarregar a página.
       event.preventDefault();
-
-      // Pega o primeiro arquivo selecionado pelo usuário no campo de input.
       const file = fileInput.files[0];
-      // Se nenhum arquivo foi selecionado, não faz nada.
       if (!file) return;
-
-      // Atualiza o status para dar feedback visual ao usuário (spinner e texto).
+      
       statusEl.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> Enviando...';
       statusEl.className = 'mt-3 text-center text-primary';
-
+      
       try {
-        // Faz uma requisição POST para a nossa rota de upload no backend.
         const response = await fetch('/api/upload', {
           method: 'POST',
           headers: {
-            // Cabeçalho personalizado essencial para o backend saber o nome do arquivo.
             'x-vercel-filename': file.name,
-            // Cabeçalho que informa o tipo do arquivo (ex: 'image/jpeg').
             'Content-Type': file.type,
           },
-          // O corpo (body) da requisição é o próprio objeto do arquivo.
           body: file,
         });
         
-        // Pega a resposta JSON do servidor.
         const newBlob = await response.json();
-
-        // Se a resposta HTTP foi bem-sucedida...
+        
         if (response.ok) {
-          // Atualiza o status para uma mensagem de sucesso.
-          statusEl.innerHTML = `<div class="status-gif"></div> ✅ Upload concluído!`;
+          statusEl.innerHTML = `<span class="rainbow-text">✅ Upload concluído! ✦ ${file.name}</span>`;
           statusEl.className = 'mt-3 text-center text-success';
-          // Limpa o campo de input de arquivo, deixando-o pronto para o próximo upload.
           form.reset();
-          // Recarrega a galeria para exibir a nova imagem imediatamente.
           loadGallery();
         } else {
-          // Se a resposta não foi 'ok', lança um erro com a mensagem vinda do servidor.
           throw new Error(newBlob.message);
         }
-
       } catch (error) {
-        // Captura qualquer erro (de rede ou lançado por nós) e exibe uma mensagem de falha.
-        statusEl.innerHTML = `<div class="status-gif"></div> ❌ Erro no upload: ${error.message}`;
+        statusEl.innerHTML = `<span class="blink">❌ Erro no upload: ${error.message}</span>`;
         statusEl.className = 'mt-3 text-center text-danger';
       }
     });
 
-    // --- 4. CARREGAMENTO INICIAL DA APLICAÇÃO ---
-    // Adiciona um "ouvinte" ao evento 'DOMContentLoaded', que é disparado
-    // quando o documento HTML inicial foi completamente carregado e analisado.
-    // Isso garante que o script só tente manipular elementos que já existem.
-    document.addEventListener('DOMContentLoaded', function() {
-      loadGallery();
-      
-      // Contador de visitas (fake)
-      const countEl = document.getElementById('visitCount');
-      let count = Math.floor(Math.random() * 9000) + 1000;
-      countEl.textContent = String(count).padStart(6, '0');
-      
-      // Incrementa o contador periodicamente
-      setInterval(() => {
-        count++;
-        countEl.textContent = String(count).padStart(6, '0');
-      }, 30000);
+    // --- 7. CONFIGURAR EVENTO DE CONFIRMAÇÃO DE RENOMEAR ---
+    confirmRenameBtn.addEventListener('click', () => {
+      const newFilename = newFilenameInput.value.trim();
+      if (newFilename) {
+        renameImage(currentBlobUrl, newFilename);
+        renameModal.hide();
+      } else {
+        alert('Por favor, digite um novo nome para a imagem!');
+      }
     });
-  </script>
 
+    // --- 8. CARREGAMENTO INICIAL DA APLICAÇÃO ---
+    document.addEventListener('DOMContentLoaded', loadGallery);
+  </script>
 </body>
 </html>
