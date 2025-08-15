@@ -3,15 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload e Galeria - Vercel Blob</title>
-
+  <title>Galeria Geocities - Vermelho e Preto</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* --- ESTILO GEOCITIES --- */
-    /* ... (manter todos os estilos anteriores) ... */
+    /* --- ESTILO GEOCITIES VERMELHO E PRETO --- */
+    body {
+      background-color: #000;
+      background-image: url('https://blob.gifcities.org/gifcities/QMNSIX2Q4DYDQSENI7D5LCZDBHD2GJOC.gif');
+      background-size: cover;
+      font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+      color: #ff0000;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
     
-    /* Novos estilos para os botões de ação */
+    /* Cabeçalho animado */
+    .header {
+      background: url('https://blob.gifcities.org/gifcities/UB76OUGYKPKJXLL45RYH72A326IOHEV5.gif') repeat-x;
+      text-align: center;
+      padding: 15px 0;
+      border-bottom: 5px double #ff0000;
+      position: relative;
+    }
+    
+    .header h1 {
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+      margin: 0;
+      animation: blink 1.5s infinite;
+      letter-spacing: 3px;
+    }
+    
+    .under-construction {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: url('Em-Construcao.gif') no-repeat;
+      width: 80px;
+      height: 80px;
+      animation: spin 4s linear infinite;
+    }
+    
+    .container {
+      background: #000;
+      border: 8px double #ff0000;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 1200px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+    
+    .container:before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 3px solid #ff0000;
+      z-index: -1;
+    }
+    
+    .upload-section {
+      background: #222;
+      padding: 20px;
+      border: 4px ridge #ff0000;
+      margin: 20px 0;
+      position: relative;
+    }
+    
+    .upload-section h2 {
+      color: #ff0000;
+      text-align: center;
+      text-shadow: 0 0 5px #ff0000;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 3px dotted #ff0000;
+      padding-bottom: 10px;
+    }
+    
+    .input-group {
+      border: 3px groove #ff0000;
+      overflow: hidden;
+      background: #000;
+    }
+    
+    .form-control {
+      background: #111;
+      color: #ff0000;
+      border: none;
+      font-weight: bold;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(to bottom, #ff0000, #800000);
+      color: #fff;
+      font-weight: bold;
+      border: 3px outset #ff5555;
+      padding: 10px 20px;
+      text-shadow: 1px 1px 1px #000;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(to bottom, #ff5555, #800000);
+      border: 3px inset #ff5555;
+      transform: scale(1.05);
+    }
+    
+    #status {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      border: 2px dotted #ff0000;
+      background: #111;
+      color: #ff0000;
+      margin-top: 15px;
+      animation: pulse 2s infinite;
+    }
+    
+    .separator {
+      width: 95%;
+      height: 30px;
+      background: url('https://blob.gifcities.org/gifcities/WRLXQZOTS7333DD5UIE6EZILYAN6A4XN.gif') center center repeat-x;
+      margin: 30px 0;
+      position: relative;
+    }
+    
+    .separator:before, .separator:after {
+      content: "✧";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ff0000;
+      font-size: 24px;
+      background: #000;
+      padding: 0 10px;
+    }
+    
+    .separator:before {
+      left: 20%;
+    }
+    
+    .separator:after {
+      right: 20%;
+    }
+    
+    .gallery-section h2 {
+      color: #ff0000;
+      text-align: center;
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px #ff0000;
+      margin-bottom: 20px;
+      background: url('https://blob.gifcities.org/gifcities/CRT7NJ3Y2B5TOY6OHBROY7YRUG6F6BXT.gif');
+      background-size: cover;
+      padding: 10px;
+      border: 3px double #ff0000;
+    }
+    
+    .gallery-item .card {
+      background: #111;
+      border: 4px ridge #ff0000;
+      border-radius: 0;
+      overflow: hidden;
+      transition: all 0.3s;
+      position: relative;
+    }
+    
+    .gallery-item .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff0000;
+      z-index: 10;
+    }
+    
+    .card-img-top {
+      border-bottom: 3px solid #ff0000;
+      cursor: pointer;
+    }
+    
+    .card-body {
+      background: #222;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .card-text {
+      font-size: 14px;
+      color: #ff5555;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
     .action-buttons {
       display: flex;
       justify-content: space-between;
@@ -19,75 +209,256 @@
     }
     
     .btn-rename {
-      background: linear-gradient(45deg, #ffff00, #ff9900);
-      color: #000;
-      font-weight: bold;
-      border: 2px solid #ff0;
-      border-radius: 0;
-      padding: 5px 10px;
+      background: linear-gradient(to bottom, #333, #000);
+      color: #ff5555;
+      border: 2px outset #ff5555;
       flex: 1;
       margin-right: 5px;
+      font-weight: bold;
     }
     
     .btn-delete {
-      background: linear-gradient(45deg, #ff0000, #990000);
+      background: linear-gradient(to bottom, #800000, #300000);
       color: #fff;
-      font-weight: bold;
-      border: 2px solid #f00;
-      border-radius: 0;
-      padding: 5px 10px;
+      border: 2px outset #ff5555;
       flex: 1;
       margin-left: 5px;
+      font-weight: bold;
     }
     
     .btn-save {
-      background: linear-gradient(45deg, #00ff00, #00aa00);
-      color: #000;
+      background: linear-gradient(to bottom, #008000, #003000);
+      color: #fff;
+      border: 2px outset #55ff55;
       font-weight: bold;
-      border: 2px solid #0f0;
-      border-radius: 0;
-      padding: 5px 10px;
-      margin-left: 5px;
+      margin-top: 5px;
+      width: 100%;
     }
     
+    .counter {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #000;
+      color: #ff0000;
+      border: 3px double #ff0000;
+      padding: 5px 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 18px;
+      z-index: 1000;
+      box-shadow: 0 0 10px #ff0000;
+    }
+    
+    .floating-gifs {
+      position: fixed;
+      z-index: -1;
+    }
+    
+    .floating-gifs div {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      animation: float 8s infinite ease-in-out;
+    }
+    
+    .gif1 { 
+      top: 10%; 
+      left: 5%; 
+      background: url('Anjo-Vermelho.gif') center/contain no-repeat;
+    }
+    
+    .gif2 { 
+      top: 70%; 
+      left: 80%; 
+      background: url('Caveira-Girando.gif') center/contain no-repeat;
+    }
+    
+    .gif3 { 
+      top: 40%; 
+      left: 90%; 
+      background: url('Estrela-Vermelha.gif') center/contain no-repeat;
+    }
+    
+    .gif4 { 
+      top: 80%; 
+      left: 10%; 
+      background: url('Fogo.gif') center/contain no-repeat;
+    }
+    
+    /* Modal de imagem */
     .modal-content {
-      background: #0000aa;
-      border: 3px solid #ff00ff;
-      color: #ff0;
-      text-shadow: 0 0 5px #000;
+      background: #000;
+      border: 5px double #ff0000;
+      color: #ff0000;
     }
     
     .modal-header {
-      border-bottom: 2px solid #ff00ff;
+      border-bottom: 3px double #ff0000;
     }
     
     .modal-footer {
-      border-top: 2px solid #ff00ff;
+      border-top: 3px double #ff0000;
     }
     
-    .form-control {
-      background: #000;
-      color: #0f0;
-      border: 1px solid #ff0;
+    #imageModal .modal-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    #imageModal .modal-body img {
+      max-width: 100%;
+      max-height: 80vh;
+      border: 3px ridge #ff0000;
+    }
+    
+    /* Animações */
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 5px #ff0000; }
+      50% { box-shadow: 0 0 20px #ff0000; }
+      100% { box-shadow: 0 0 5px #ff0000; }
+    }
+    
+    /* Rodapé */
+    .footer {
+      background: url('Fundo-Faixa-Vermelha.gif') repeat-x;
+      text-align: center;
+      padding: 10px 0;
+      margin-top: 20px;
+      border-top: 5px double #ff0000;
+      color: #fff;
+      font-weight: bold;
+    }
+    
+    .footer a {
+      color: #ff5555;
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .gallery-section h2 {
+        font-size: 1.8rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .btn-rename, .btn-delete {
+        margin: 5px 0;
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Marquee animado -->
-  <div class="marquee">
-    <span class="rainbow-text">✦✦✦ BEM-VINDO AO MEU SITE! ✦✦✦ ENVIE SUAS IMAGENS! ✦✦✦ GALERIA 100% GRATUITA! ✦✦✦ VISITANTE Nº: <span id="counter">00001</span> ✦✦✦</span>
+  <!-- Elementos flutuantes -->
+  <div class="floating-gifs">
+    <div class="gif1"></div>
+    <div class="gif2"></div>
+    <div class="gif3"></div>
+    <div class="gif4"></div>
   </div>
   
-  <!-- Elementos decorativos -->
-  <div class="under-construction blink">EM CONSTRUÇÃO</div>
-  <div class="animated-star">✦</div>
+  <!-- Cabeçalho -->
+  <div class="header">
+    <div class="under-construction"></div>
+    <h1>GALERIA DO ROCK</h1>
+    <p style="color: #fff; margin: 5px 0;">O melhor lugar para suas fotos!</p>
+  </div>
+  
+  <div class="container">
+    <!-- Seção de Upload -->
+    <div class="upload-section">
+      <h2>UPLOAD DE FOTOS</h2>
+      <form id="uploadForm">
+        <div class="input-group">
+          <input type="file" class="form-control" id="fileInput" name="file" required accept="image/*">
+          <button type="submit" class="btn btn-primary">ENVIAR AGORA!</button>
+        </div>
+      </form>
+      <div id="status" class="mt-3">✧ ✧ ✧ AGUARDANDO ARQUIVO ✧ ✧ ✧</div>
+    </div>
+    
+    <!-- Separador -->
+    <div class="separator"></div>
+    
+    <!-- Galeria de Imagens -->
+    <div class="gallery-section">
+      <h2>SUAS FOTOS</h2>
+      <div id="gallery" class="row"></div>
+    </div>
+  </div>
+  
+  <!-- Rodapé -->
+  <div class="footer">
+    <div class="container">
+      © 2025 Galeria
+      <br>
+      <a href="#">Home</a> | <a href="#">Sobre</a> | <a href="#">Contato</a> | <a href="#">Guestbook</a>
+    </div>
+  </div>
+  
+  <!-- Contador de visitantes -->
+  <div class="counter">
+    <i class="fas fa-users"></i> VISITANTES: <span id="visitorCount">001</span>
+  </div>
+  
+  <!-- Modal para visualização de imagem -->
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">VISUALIZAÇÃO DE IMAGEM</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="" alt="Imagem ampliada">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="downloadBtn">
+            <i class="fas fa-download"></i> SALVAR FOTO
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- Modal para renomear -->
   <div class="modal fade" id="renameModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title rainbow-text">Renomear Imagem</h5>
+          <h5 class="modal-title">RENOMEAR IMAGEM</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -105,52 +476,33 @@
     </div>
   </div>
 
-  <div class="container my-5">
-    <div class="upload-section col-lg-8 mx-auto">
-      <h1>Upload para Vercel Blob</h1>
-      <form id="uploadForm">
-        <div class="input-group">
-          <input type="file" class="form-control" id="fileInput" name="file" required accept="image/*">
-          <button type="submit" class="btn btn-primary">ENVIAR AGORA!</button>
-        </div>
-      </form>
-      <div id="status" class="mt-3 text-center">✧ ✧ ✧ AGUARDANDO ARQUIVO ✧ ✧ ✧</div>
-    </div>
-
-    <hr class="my-5">
-    <h2>Galeria de Imagens</h2>
-    <div id="gallery" class="row"></div>
-  </div>
-
-  <!-- Contador de visitantes -->
-  <div class="visitor-counter">VISITANTES: <span id="visitorCount">001</span></div>
-
-  <!-- Adicionar Bootstrap JS para modais -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
   <script>
-    // --- 1. REFERÊNCIAS AOS ELEMENTOS DO DOM ---
+    // --- REFERÊNCIAS AOS ELEMENTOS DO DOM ---
     const form = document.getElementById('uploadForm');
     const fileInput = document.getElementById('fileInput');
     const statusEl = document.getElementById('status');
     const galleryEl = document.getElementById('gallery');
-    const counter = document.getElementById('counter');
     const visitorCount = document.getElementById('visitorCount');
+    
+    // Modais
+    const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
     const renameModal = new bootstrap.Modal(document.getElementById('renameModal'));
+    
+    // Elementos do modal de imagem
+    const imageModalImg = document.querySelector('#imageModal img');
+    const downloadBtn = document.getElementById('downloadBtn');
+    
+    // Elementos do modal de renomear
     const newFilenameInput = document.getElementById('newFilename');
     const confirmRenameBtn = document.getElementById('confirmRename');
     const renameUrlInput = document.getElementById('renameUrl');
-    let currentBlobUrl = '';
-
-    // --- ADIÇÕES DE FUNCIONALIDADE VISUAL ---
-    // Contador de visitas (apenas visual)
-    let count = 1;
-    setInterval(() => {
-      count++;
-      counter.textContent = count.toString().padStart(5, '0');
-    }, 3000);
     
-    // Contador de visitantes (persistente)
+    let currentBlobUrl = '';
+    let currentImageUrl = '';
+
+    // --- CONTADOR DE VISITANTES ---
     document.addEventListener('DOMContentLoaded', () => {
       let visits = localStorage.getItem('visits');
       visits = visits ? parseInt(visits) + 1 : 1;
@@ -158,9 +510,9 @@
       visitorCount.textContent = visits.toString().padStart(3, '0');
     });
 
-    // --- 2. FUNÇÃO PARA CARREGAR A GALERIA ---
+    // --- FUNÇÃO PARA CARREGAR A GALERIA ---
     async function loadGallery() {
-      galleryEl.innerHTML = '<p class="text-center blink">Carregando imagens...</p>';
+      galleryEl.innerHTML = '<p class="text-center">Carregando imagens...</p>';
       
       try {
         const response = await fetch('/api/files');
@@ -171,7 +523,7 @@
         galleryEl.innerHTML = '';
         
         if (files.length === 0) {
-          galleryEl.innerHTML = '<p class="text-center rainbow-text">Nenhuma imagem encontrada. Envie a primeira!</p>';
+          galleryEl.innerHTML = '<p class="text-center">Nenhuma imagem encontrada. Envie a primeira!</p>';
           return;
         }
         
@@ -181,21 +533,24 @@
           
           const card = `
             <div class="card h-100 shadow-sm">
-                <a href="${file.url}" target="_blank">
-                    <img src="${file.url}" class="card-img-top" alt="${file.pathname}">
-                </a>
+                <img src="${file.url}" class="card-img-top" alt="${file.pathname}" data-url="${file.url}">
                 <div class="card-body text-center">
                     <p class="card-text small text-muted" title="${file.pathname}">
                         ${file.pathname.length > 20 ? file.pathname.substring(0, 20) + '...' : file.pathname}
                     </p>
                 </div>
-                <div class="card-footer action-buttons">
+                <div class="card-footer">
+                  <div class="action-buttons">
                     <button class="btn btn-rename" data-url="${file.url}" data-pathname="${file.pathname}">
-                        Renomear
+                      <i class="fas fa-edit"></i> Renomear
                     </button>
                     <button class="btn btn-delete" data-url="${file.url}">
-                        Excluir
+                      <i class="fas fa-trash"></i> Excluir
                     </button>
+                  </div>
+                  <button class="btn btn-save" data-url="${file.url}" data-filename="${file.pathname}">
+                    <i class="fas fa-download"></i> Salvar Foto
+                  </button>
                 </div>
             </div>`;
           
@@ -203,28 +558,53 @@
           galleryEl.appendChild(col);
         });
 
-        // Adicionar event listeners aos novos botões
-        document.querySelectorAll('.btn-rename').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const url = e.target.getAttribute('data-url');
-            const pathname = e.target.getAttribute('data-pathname');
-            openRenameModal(url, pathname);
-          });
-        });
-
-        document.querySelectorAll('.btn-delete').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const url = e.target.getAttribute('data-url');
-            deleteImage(url);
-          });
-        });
+        // Adicionar event listeners
+        addEventListeners();
 
       } catch (error) {
         galleryEl.innerHTML = `<p class="text-center text-danger">Erro ao carregar a galeria: ${error.message}</p>`;
       }
     }
 
-    // --- 3. FUNÇÃO PARA ABRIR MODAL DE RENOMEAR ---
+    // --- ADICIONAR EVENT LISTENERS ---
+    function addEventListeners() {
+      // Visualizar imagem
+      document.querySelectorAll('.card-img-top').forEach(img => {
+        img.addEventListener('click', (e) => {
+          currentImageUrl = e.target.getAttribute('data-url') || e.target.src;
+          imageModalImg.src = currentImageUrl;
+          imageModal.show();
+        });
+      });
+      
+      // Botão de salvar (download)
+      document.querySelectorAll('.btn-save').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const url = e.target.getAttribute('data-url');
+          const filename = e.target.getAttribute('data-filename');
+          downloadImage(url, filename);
+        });
+      });
+      
+      // Botão de renomear
+      document.querySelectorAll('.btn-rename').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const url = e.target.getAttribute('data-url');
+          const pathname = e.target.getAttribute('data-pathname');
+          openRenameModal(url, pathname);
+        });
+      });
+      
+      // Botão de excluir
+      document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const url = e.target.getAttribute('data-url');
+          deleteImage(url);
+        });
+      });
+    }
+
+    // --- FUNÇÃO PARA ABRIR MODAL DE RENOMEAR ---
     function openRenameModal(url, currentName) {
       currentBlobUrl = url;
       newFilenameInput.value = currentName;
@@ -232,7 +612,7 @@
       renameModal.show();
     }
 
-    // --- 4. FUNÇÃO PARA RENOMEAR IMAGEM ---
+    // --- FUNÇÃO PARA RENOMEAR IMAGEM ---
     async function renameImage(url, newFilename) {
       try {
         const response = await fetch('/api/rename', {
@@ -249,18 +629,19 @@
         const result = await response.json();
         
         if (response.ok) {
-          statusEl.innerHTML = `<span class="rainbow-text">✅ Imagem renomeada para: ${newFilename}</span>`;
+          statusEl.innerHTML = `<span>✅ Imagem renomeada para: ${newFilename}</span>`;
+          statusEl.className = 'mt-3 text-center text-success';
           loadGallery();
         } else {
           throw new Error(result.message);
         }
       } catch (error) {
-        statusEl.innerHTML = `<span class="blink">❌ Erro ao renomear: ${error.message}</span>`;
+        statusEl.innerHTML = `<span>❌ Erro ao renomear: ${error.message}</span>`;
         statusEl.className = 'mt-3 text-center text-danger';
       }
     }
 
-    // --- 5. FUNÇÃO PARA EXCLUIR IMAGEM ---
+    // --- FUNÇÃO PARA EXCLUIR IMAGEM ---
     async function deleteImage(url) {
       if (!confirm('Tem certeza que deseja excluir esta imagem?')) return;
       
@@ -276,18 +657,29 @@
         const result = await response.json();
         
         if (response.ok) {
-          statusEl.innerHTML = `<span class="rainbow-text">🗑️ Imagem excluída com sucesso!</span>`;
+          statusEl.innerHTML = `<span>🗑️ Imagem excluída com sucesso!</span>`;
+          statusEl.className = 'mt-3 text-center text-success';
           loadGallery();
         } else {
           throw new Error(result.message);
         }
       } catch (error) {
-        statusEl.innerHTML = `<span class="blink">❌ Erro ao excluir: ${error.message}</span>`;
+        statusEl.innerHTML = `<span>❌ Erro ao excluir: ${error.message}</span>`;
         statusEl.className = 'mt-3 text-center text-danger';
       }
     }
 
-    // --- 6. "OUVINTE" DE EVENTO DO FORMULÁRIO DE UPLOAD ---
+    // --- FUNÇÃO PARA SALVAR IMAGEM (DOWNLOAD) ---
+    function downloadImage(url, filename) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename || 'imagem.jpg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // --- EVENTO DE UPLOAD ---
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const file = fileInput.files[0];
@@ -309,7 +701,7 @@
         const newBlob = await response.json();
         
         if (response.ok) {
-          statusEl.innerHTML = `<span class="rainbow-text">✅ Upload concluído! ✦ ${file.name}</span>`;
+          statusEl.innerHTML = `<span>✅ Upload concluído! ${file.name}</span>`;
           statusEl.className = 'mt-3 text-center text-success';
           form.reset();
           loadGallery();
@@ -317,12 +709,12 @@
           throw new Error(newBlob.message);
         }
       } catch (error) {
-        statusEl.innerHTML = `<span class="blink">❌ Erro no upload: ${error.message}</span>`;
+        statusEl.innerHTML = `<span>❌ Erro no upload: ${error.message}</span>`;
         statusEl.className = 'mt-3 text-center text-danger';
       }
     });
 
-    // --- 7. CONFIGURAR EVENTO DE CONFIRMAÇÃO DE RENOMEAR ---
+    // --- CONFIGURAR EVENTO DE CONFIRMAÇÃO DE RENOMEAR ---
     confirmRenameBtn.addEventListener('click', () => {
       const newFilename = newFilenameInput.value.trim();
       if (newFilename) {
@@ -333,7 +725,13 @@
       }
     });
 
-    // --- 8. CARREGAMENTO INICIAL DA APLICAÇÃO ---
+    // --- CONFIGURAR BOTÃO DE DOWNLOAD NO MODAL ---
+    downloadBtn.addEventListener('click', () => {
+      const filename = currentImageUrl.split('/').pop();
+      downloadImage(currentImageUrl, filename);
+    });
+
+    // --- CARREGAMENTO INICIAL DA APLICAÇÃO ---
     document.addEventListener('DOMContentLoaded', loadGallery);
   </script>
 </body>
