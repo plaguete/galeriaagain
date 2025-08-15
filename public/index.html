@@ -289,6 +289,21 @@
     * {
       cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='8' fill='%23ff00ff'/><circle cx='16' cy='16' r='4' fill='%23ffffff'/></svg>"), auto;
     }
+    
+    .empty-gallery {
+      text-align: center;
+      padding: 30px;
+      font-size: 20px;
+      color: #990099;
+      background: #ffffcc;
+      border: 3px dashed #ff9900;
+      margin: 20px 0;
+    }
+    
+    .empty-gallery img {
+      width: 100px;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
@@ -334,7 +349,12 @@
       <h2>✦ GALERIA DE IMAGENS ✦</h2>
       
       <div class="gallery-grid" id="gallery">
-        <!-- As imagens serão carregadas aqui via JavaScript -->
+        <!-- Mensagem quando a galeria está vazia -->
+        <div class="empty-gallery">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><circle cx='50' cy='50' r='40' fill='%23ffccff'/><path d='M30,30 L70,70 M70,30 L30,70' stroke='%23990099' stroke-width='8'/></svg>" alt="Ícone de galeria vazia">
+          <p>A galeria está vazia!</p>
+          <p>Seja o primeiro a enviar uma imagem!</p>
+        </div>
       </div>
     </div>
     
@@ -362,6 +382,9 @@
     const galleryEl = document.getElementById('gallery');
     const counterEl = document.getElementById('visitCounter');
     
+    // Array para armazenar imagens enviadas
+    let uploadedImages = [];
+    
     // Contador de visitas (simulado)
     let visitCount = parseInt(localStorage.getItem('visitCount') || '0') + 1;
     localStorage.setItem('visitCount', visitCount.toString());
@@ -372,39 +395,36 @@
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           // Simula uma resposta do servidor
-          resolve({
+          const imageData = {
             url: URL.createObjectURL(file),
             pathname: file.name,
             uploadedAt: new Date().toISOString()
-          });
+          };
+          
+          // Adiciona a nova imagem ao array
+          uploadedImages.push(imageData);
+          
+          resolve(imageData);
         }, 1500);
       });
     }
     
-    // Função para carregar imagens de exemplo
-    function loadSampleImages() {
-      const sampleImages = [
-        { url: 'https://picsum.photos/200/300?random=1', pathname: 'natureza.jpg' },
-        { url: 'https://picsum.photos/200/300?random=2', pathname: 'cidade.jpg' },
-        { url: 'https://picsum.photos/200/300?random=3', pathname: 'animais.jpg' },
-        { url: 'https://picsum.photos/200/300?random=4', pathname: 'paisagem.jpg' },
-        { url: 'https://picsum.photos/200/300?random=5', pathname: 'viagem.jpg' },
-        { url: 'https://picsum.photos/200/300?random=6', pathname: 'festa.jpg' }
-      ];
-      
-      renderGallery(sampleImages);
-    }
-    
     // Função para renderizar a galeria
-    function renderGallery(images) {
+    function renderGallery() {
       galleryEl.innerHTML = '';
       
-      if (images.length === 0) {
-        galleryEl.innerHTML = '<p class="text-center">Nenhuma imagem encontrada. Envie a primeira!</p>';
+      if (uploadedImages.length === 0) {
+        galleryEl.innerHTML = `
+          <div class="empty-gallery">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><circle cx='50' cy='50' r='40' fill='%23ffccff'/><path d='M30,30 L70,70 M70,30 L30,70' stroke='%23990099' stroke-width='8'/></svg>" alt="Ícone de galeria vazia">
+            <p>A galeria está vazia!</p>
+            <p>Seja o primeiro a enviar uma imagem!</p>
+          </div>
+        `;
         return;
       }
       
-      images.forEach(image => {
+      uploadedImages.forEach(image => {
         const galleryItem = document.createElement('div');
         galleryItem.className = 'gallery-item';
         
@@ -430,6 +450,7 @@
       statusEl.innerHTML = '<div class="blink">★ Enviando sua imagem... ★</div>';
       statusEl.style.backgroundColor = '#ffffcc';
       statusEl.style.borderColor = '#ff9900';
+      statusEl.style.display = 'block';
       
       try {
         // Simulação de upload
@@ -440,8 +461,8 @@
         statusEl.style.backgroundColor = '#ccffcc';
         statusEl.style.borderColor = '#00cc00';
         
-        // Recarrega a galeria (na implementação real, chamaria loadGallery)
-        loadSampleImages();
+        // Atualiza a galeria
+        renderGallery();
         
         // Limpa o campo de arquivo
         form.reset();
@@ -454,8 +475,8 @@
       }
     });
     
-    // Carrega as imagens de exemplo ao iniciar
-    document.addEventListener('DOMContentLoaded', loadSampleImages);
+    // Inicializa a galeria vazia
+    document.addEventListener('DOMContentLoaded', renderGallery);
   </script>
 </body>
 </html>
