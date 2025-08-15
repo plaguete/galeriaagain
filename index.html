@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Site Incrível - Galeria de Imagens</title>
+  
+  <style>
+    /* Estilo Geocities - Anos 90 */
+    body {
+      background: #ff66cc url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="%23ff99ff"/><circle cx="100" cy="100" r="30" fill="%23cc66ff"/></svg>') repeat;
+      font-family: "Comic Sans MS", "Arial Rounded MT Bold", sans-serif;
+      color: #0000ff;
+      margin: 0;
+      padding: 0;
+      animation: backgroundScroll 30s linear infinite;
+    }
+
+    @keyframes backgroundScroll {
+      from { background-position: 0 0; }
+      to { background-position: 200px 200px; }
+    }
+
+    /* Container principal */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 8px ridge #ffcc00;
+      box-shadow: 0 0 20px #ff00ff;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Animação de boas-vindas */
+    .welcome-banner {
+      background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #0000ff, #ff00ff);
+      text-align: center;
+      padding: 15px;
+      margin: 20px 0;
+      border: 5px double #ffffff;
+      animation: colorChange 5s infinite alternate;
+    }
+
+    @keyframes colorChange {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .welcome-banner h1 {
+      font-size: 36px;
+      margin: 0;
+      color: #ffffff;
+      text-shadow: 3px 3px 0 #000000;
+      letter-spacing: 3px;
+    }
+
+    /* Área de upload */
+    .upload-section {
+      background: #99ccff;
+      padding: 20px;
+      border: 4px dashed #0066cc;
+      margin: 20px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .upload-section h2 {
+      color: #0000cc;
+      text-decoration: underline;
+      font-size: 28px;
+      margin-top: 0;
+    }
+
+    .upload-section:before {
+      content: "★";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      font-size: 24px;
+      color: #ff0000;
+      animation: spin 4s linear infinite;
+    }
+
+    .upload-section:after {
+      content: "★";
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      font-size: 24px;
+      color: #ff0000;
+      animation: spin 4s linear infinite reverse;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Formulário de upload */
+    #uploadForm {
+      margin: 20px auto;
+      max-width: 500px;
+    }
+
+    #fileInput {
+      background-color: #ffffcc;
+      border: 3px solid #ff9900;
+      padding: 10px;
+      font-size: 18px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+    }
+
+    #uploadForm button {
+      background: linear-gradient(to bottom, #ffcc00, #ff9900);
+      border: 3px outset #cc6600;
+      color: #000000;
+      font-weight: bold;
+      padding: 12px 25px;
+      font-size: 20px;
+      cursor: pointer;
+      text-shadow: 1px 1px 1px #ffffff;
+      transition: all 0.3s;
+    }
+
+    #uploadForm button:hover {
+      background: linear-gradient(to bottom, #ffdd44, #ffaa00);
+      transform: scale(1.05);
+    }
+
+    /* Status de upload */
+    #status {
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 15px;
+      background-color: #ccffcc;
+      border: 2px solid #00cc00;
+      display: inline-block;
+      min-width: 200px;
+    }
+
+    /* Galeria de imagens */
+    .gallery-section {
+      background: #ffccff;
+      padding: 20px;
+      border: 4px dotted #ff00ff;
+      margin-top: 30px;
+    }
+
+    .gallery-section h2 {
+      text-align: center;
+      color: #990099;
+      font-size: 32px;
+      text-shadow: 2px 2px 0 #ffffff;
+      margin-top: 0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery-item {
+      background: #ffffff;
+      border: 4px ridge #cc99ff;
+      padding: 8px;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    .gallery-item img {
+      max-width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border: 2px solid #cc66cc;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .gallery-item .filename {
+      font-size: 14px;
+      color: #330033;
+      word-break: break-all;
+      background-color: #ffffcc;
+      padding: 3px;
+      border: 1px dotted #ff9900;
+    }
+
+    /* Elementos decorativos */
+    .marquee {
+      background-color: #00ccff;
+      color: #ffffff;
+      padding: 10px;
+      margin: 20px 0;
+      font-weight: bold;
+      border: 3px groove #0066cc;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+    }
+
+    .counter {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #000000;
+      color: #00ff00;
+      padding: 5px 10px;
+      font-family: monospace;
+      font-size: 18px;
+      border: 2px solid #00ff00;
+    }
+
+    .construction {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      transform: rotate(-10deg);
+      background: #ffff00;
+      color: #ff0000;
+      padding: 5px 10px;
+      font-weight: bold;
+      border: 3px dotted #ff0000;
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0.2; }
+    }
+
+    .webring {
+      text-align: center;
+      margin: 20px 0;
+      padding: 10px;
+      background: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
+      color: #ffffff;
+      font-weight: bold;
+      border: 4px double #ffffff;
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #ccffcc;
+      border-top: 4px groove #00cc00;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #006600;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animação de cursor */
+    * {
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='8' fill='%23ff00ff'/><circle cx='16' cy='16' r='4' fill='%23ffffff'/></svg>"), auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Contador de visitas -->
+    <div class="counter">
+      <span id="visitCounter">00001</span> visitantes!
+    </div>
+    
+    <!-- Banner animado -->
+    <div class="welcome-banner blink">
+      <h1>★ BEM-VINDO À MINHA GALERIA ★</h1>
+    </div>
+    
+    <!-- Marquee animado -->
+    <div class="marquee">
+      <span>✧･ﾟ: *✧･ﾟ:* NOVO! ✧･ﾟ: *✧･ﾟ:* ENVIE SUAS FOTOS! ✧･ﾟ: *✧･ﾟ:* TOTALMENTE GRÁTIS! ✧･ﾟ: *✧･ﾟ:* </span>
+    </div>
+    
+    <!-- Área de upload -->
+    <div class="upload-section">
+      <h2>UPLOAD DE IMAGENS</h2>
+      <p>Envie suas fotos favoritas para nossa galeria!</p>
+      
+      <form id="uploadForm">
+        <input type="file" id="fileInput" name="file" required accept="image/*">
+        <br>
+        <button type="submit">ENVIAR AGORA!</button>
+      </form>
+      
+      <div id="status"></div>
+    </div>
+    
+    <!-- Webring -->
+    <div class="webring">
+      <a href="#">« Anterior</a> | 
+      <a href="#">MEU WEBRING</a> | 
+      <a href="#">Próximo »</a>
+    </div>
+    
+    <!-- Galeria de imagens -->
+    <div class="gallery-section">
+      <h2>✦ GALERIA DE IMAGENS ✦</h2>
+      
+      <div class="gallery-grid" id="gallery">
+        <!-- As imagens serão carregadas aqui via JavaScript -->
+      </div>
+    </div>
+    
+    <!-- Rodapé -->
+    <footer>
+      <p>© 2024 Meu Site Incrível | Desenvolvido com ❤️ | 
+        <a href="#">Webmaster</a> | 
+        <a href="#">Guestbook</a> | 
+        <a href="#">Links</a>
+      </p>
+      <p>Melhor visualizado em 800x600 com Netscape Navigator</p>
+    </footer>
+  </div>
+  
+  <!-- Elemento decorativo -->
+  <div class="construction blink">
+    EM CONSTRUÇÃO
+  </div>
+  
+  <script>
+    // Elementos DOM
+    const form = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('fileInput');
+    const statusEl = document.getElementById('status');
+    const galleryEl = document.getElementById('gallery');
+    const counterEl = document.getElementById('visitCounter');
+    
+    // Contador de visitas (simulado)
+    let visitCount = parseInt(localStorage.getItem('visitCount') || '0') + 1;
+    localStorage.setItem('visitCount', visitCount.toString());
+    counterEl.textContent = visitCount.toString().padStart(5, '0');
+    
+    // Função para simular upload (para demonstração)
+    function simulateUpload(file) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // Simula uma resposta do servidor
+          resolve({
+            url: URL.createObjectURL(file),
+            pathname: file.name,
+            uploadedAt: new Date().toISOString()
+          });
+        }, 1500);
+      });
+    }
+    
+    // Função para carregar imagens de exemplo
+    function loadSampleImages() {
+      const sampleImages = [
+        { url: 'https://picsum.photos/200/300?random=1', pathname: 'natureza.jpg' },
+        { url: 'https://picsum.photos/200/300?random=2', pathname: 'cidade.jpg' },
+        { url: 'https://picsum.photos/200/300?random=3', pathname: 'animais.jpg' },
+        { url: 'https://picsum.photos/200/300?random=4', pathname: 'paisagem.jpg' },
+        { url: 'https://picsum.photos/200/300?random=5', pathname: 'viagem.jpg' },
+        { url: 'https://picsum.photos/200/300?random=6', pathname: 'festa.jpg' }
+      ];
+      
+      renderGallery(sampleImages);
+    }
+    
+    // Função para renderizar a galeria
+    function renderGallery(images) {
+      galleryEl.innerHTML = '';
+      
+      if (images.length === 0) {
+        galleryEl.innerHTML = '<p class="text-center">Nenhuma imagem encontrada. Envie a primeira!</p>';
+        return;
+      }
+      
+      images.forEach(image => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        
+        galleryItem.innerHTML = `
+          <a href="${image.url}" target="_blank">
+            <img src="${image.url}" alt="${image.pathname}">
+          </a>
+          <div class="filename">${image.pathname}</div>
+        `;
+        
+        galleryEl.appendChild(galleryItem);
+      });
+    }
+    
+    // Evento de envio do formulário
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      const file = fileInput.files[0];
+      if (!file) return;
+      
+      // Feedback visual
+      statusEl.innerHTML = '<div class="blink">★ Enviando sua imagem... ★</div>';
+      statusEl.style.backgroundColor = '#ffffcc';
+      statusEl.style.borderColor = '#ff9900';
+      
+      try {
+        // Simulação de upload
+        const newImage = await simulateUpload(file);
+        
+        // Feedback de sucesso
+        statusEl.innerHTML = '<div>★ Upload concluído com sucesso! ★</div>';
+        statusEl.style.backgroundColor = '#ccffcc';
+        statusEl.style.borderColor = '#00cc00';
+        
+        // Recarrega a galeria (na implementação real, chamaria loadGallery)
+        loadSampleImages();
+        
+        // Limpa o campo de arquivo
+        form.reset();
+        
+      } catch (error) {
+        // Feedback de erro
+        statusEl.innerHTML = `<div>❌ Erro: ${error.message}</div>`;
+        statusEl.style.backgroundColor = '#ffcccc';
+        statusEl.style.borderColor = '#ff0000';
+      }
+    });
+    
+    // Carrega as imagens de exemplo ao iniciar
+    document.addEventListener('DOMContentLoaded', loadSampleImages);
+  </script>
+</body>
+</html>
