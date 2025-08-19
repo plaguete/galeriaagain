@@ -9,37 +9,38 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* --- ESTILO ALIEN/ESPACIAL GEOCITIES --- */
+    /* --- ESTILO ALIEN/ESPACIAL GEOCITIES SEM GLOW --- */
     body {
       background-color: #000;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48Y2lyY2xlIGN4PSIyNSIgY3k9IjI1IiByPSIyIiBmaWxsPSIjMDBmZjAwIiBvcGFjaXR5PSIwLjciLz48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSIjZmYwMGZmIiBvcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSIxLjUiIGZpbGw9IiMwMGZmZmYiIG9wYWNpdHk9IjAuNiIvPjwvc3ZnPg==');
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48Y2lyY2xlIGN4PSIyNSIgY3k9IjI1IiByPSIyIiBmaWxsPSIjMDBmZjAwIi8+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0iI2ZmMDBmZiIvPjxjaXJjbGUgY3g9IjQwIiBjeT0iNDAiIHI9IjEuNSIgZmlsbD0iIzAwZmZmZiIvPjwvc3ZnPg==');
       background-size: 200px;
       font-family: 'Arial', 'Comic Sans MS', cursive, sans-serif;
-      color: #0ff; /* Ciano para texto principal */
+      color: #0ff;
       margin: 0;
       padding: 0;
       overflow-x: hidden;
     }
     
-    /* Cabeçalho animado */
+    /* Cabeçalho */
     .header {
       background: #000;
       text-align: center;
       padding: 15px 0;
-      border-bottom: 5px double #0f0; /* Verde neon */
+      border-bottom: 5px double #0f0;
       position: relative;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDEwIDEwIj48cGF0aCBkPSJNMCwwIEwxMCwxME0xMCwwIEwwLDEwIiBzdHJva2U9IiMwMGZmMDAiIHN0cm9rZS13aWR0aD0iMC4yIi8+PC9zdmc+');
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDEwIDEwIj48cGF0aCBkPSJNMCwwIEwxMCwxME0xMCwwIEwwLDEwIiBzdHJva2U9IiMwMGZmMDAiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9zdmc+');
     }
     
     .header h1 {
       font-size: 3.5rem;
-      color: #f0f; /* Magenta */
-      text-shadow: 0 0 10px #f0f, 0 0 20px #f0f, 0 0 30px #0ff;
+      color: #f0f;
       margin: 0;
-      animation: blink 1.5s infinite;
       letter-spacing: 5px;
       font-family: 'Times New Roman', serif;
       text-transform: uppercase;
+      background-color: #000;
+      padding: 10px;
+      border: 3px solid #0f0;
     }
     
     .under-construction {
@@ -50,7 +51,6 @@
       height: 80px;
       background: #f0f;
       border-radius: 50%;
-      animation: spin 4s linear infinite, glow 2s ease-in-out infinite alternate;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -58,6 +58,8 @@
       font-weight: bold;
       font-size: 10px;
       text-align: center;
+      border: 2px dashed #0f0;
+      animation: spin 4s linear infinite;
     }
     
     .container {
@@ -67,8 +69,6 @@
       margin: 20px auto;
       max-width: 1200px;
       position: relative;
-      box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), 
-                  0 0 40px rgba(0, 255, 255, 0.3);
     }
     
     .container:before {
@@ -88,18 +88,18 @@
       border: 4px ridge #0ff;
       margin: 20px 0;
       position: relative;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSIjMDBmZmZmIiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4=');
     }
     
     .upload-section h2 {
       color: #0ff;
       text-align: center;
-      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
       font-size: 2rem;
       margin-bottom: 20px;
       border-bottom: 3px dotted #0f0;
       padding-bottom: 10px;
       letter-spacing: 3px;
+      background-color: #000;
+      padding: 10px;
     }
     
     .input-group {
@@ -123,8 +123,6 @@
       font-weight: bold;
       border: 3px outset #0f0;
       padding: 10px 20px;
-      text-shadow: 1px 1px 1px #0f0;
-      transition: all 0.3s;
       font-family: 'Arial Black', sans-serif;
       text-transform: uppercase;
     }
@@ -132,9 +130,7 @@
     .btn-primary:hover {
       background: linear-gradient(to bottom, #0f0, #060);
       border: 3px inset #0f0;
-      transform: scale(1.05);
       color: #fff;
-      text-shadow: 0 0 5px #fff;
     }
     
     #status {
@@ -146,7 +142,6 @@
       background: #111;
       color: #0ff;
       margin-top: 15px;
-      animation: pulse 2s infinite;
       font-family: 'Courier New', monospace;
     }
     
@@ -165,7 +160,6 @@
       color: #0f0;
       font-size: 24px;
       margin: 0 15px;
-      animation: blink 2s infinite;
     }
     
     .separator-line {
@@ -178,25 +172,11 @@
       color: #f0f;
       text-align: center;
       font-size: 2.5rem;
-      text-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
       margin-bottom: 20px;
       background: #000;
       padding: 10px;
       border: 3px double #0ff;
       letter-spacing: 4px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .gallery-section h2:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
-      animation: shine 3s infinite;
     }
     
     .gallery-item .card {
@@ -209,20 +189,18 @@
     }
     
     .gallery-item .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
-      z-index: 10;
+      transform: scale(1.03);
+      border-color: #f0f;
     }
     
     .card-img-top {
       border-bottom: 3px solid #0f0;
       cursor: pointer;
-      filter: sepia(1) hue-rotate(90deg);
       transition: filter 0.3s;
     }
     
     .card-img-top:hover {
-      filter: none;
+      filter: contrast(1.2);
     }
     
     .card-body {
@@ -284,7 +262,6 @@
       font-family: 'Courier New', monospace;
       font-size: 18px;
       z-index: 1000;
-      box-shadow: 0 0 10px #0ff;
     }
     
     .floating-elements {
@@ -304,7 +281,6 @@
       animation: float 8s infinite ease-in-out;
       background-size: contain;
       background-repeat: no-repeat;
-      opacity: 0.7;
     }
     
     .alien1 { 
@@ -340,7 +316,7 @@
       width: 60px;
       height: 30px;
       background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgNTAiPjxlbGxpcHNlIGN4PSI1MCIgY3k9IjI1IiByeD0iNDUiIHJ5PSIyMCIgZmlsbD0iIzAwZmZmZiIvPjxlbGxpcHNlIGN4PSI1MCIgY3k9IjIwIiByeD0iMzAiIHJ5PSIxNSIgZmlsbD0iI2YwZiIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iMjAiIHI9IjUiIGZpbGw9IiMwMGZmMDAiLz48L3N2Zz4=');
-      animation: float 15s infinite ease-in-out, glow 3s infinite alternate;
+      animation: float 15s infinite ease-in-out;
       animation-delay: 1s;
     }
     
@@ -349,7 +325,6 @@
       background: #000;
       border: 5px double #0ff;
       color: #0ff;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cG9seWdvbiBwb2ludHM9IjAsMCAwLDUwIDUwLDUwIDUwLDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwZmZmZiIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMyIvPjwvc3ZnPg==');
     }
     
     .modal-header {
@@ -371,16 +346,9 @@
       max-width: 100%;
       max-height: 80vh;
       border: 3px ridge #0ff;
-      box-shadow: 0 0 20px #0ff;
     }
     
-    /* Animações */
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-    
+    /* Animações simplificadas */
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -394,22 +362,6 @@
       100% { transform: translateY(0) translateX(0); }
     }
     
-    @keyframes pulse {
-      0% { box-shadow: 0 0 5px #0ff; }
-      50% { box-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
-      100% { box-shadow: 0 0 5px #0ff; }
-    }
-    
-    @keyframes glow {
-      0% { filter: drop-shadow(0 0 5px #0f0); }
-      100% { filter: drop-shadow(0 0 15px #0ff) drop-shadow(0 0 25px #f0f); }
-    }
-    
-    @keyframes shine {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-    
     /* Rodapé */
     .footer {
       background: #000;
@@ -419,54 +371,17 @@
       border-top: 5px double #f0f;
       color: #0ff;
       font-weight: bold;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .footer:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #0f0, #0ff, #f0f, #0f0, transparent);
-      animation: shine 5s infinite linear;
     }
     
     .footer a {
       color: #0f0;
       text-decoration: none;
-      text-shadow: 0 0 5px #0f0;
       transition: all 0.3s;
     }
     
     .footer a:hover {
       color: #f0f;
-      text-shadow: 0 0 10px #f0f;
       text-decoration: overline;
-    }
-    
-    /* Efeito de digitação no título */
-    .typing-container {
-      display: inline-block;
-    }
-    
-    .typing-effect {
-      overflow: hidden;
-      border-right: 0.15em solid #0f0;
-      white-space: nowrap;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    }
-    
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #0f0; }
     }
     
     /* Responsividade */
@@ -507,8 +422,8 @@
   <!-- Cabeçalho -->
   <div class="header">
     <div class="under-construction">EM CONSTRUÇÃO<br>INTERDIMENSIONAL</div>
-    <h1><span class="typing-container"><span class="typing-effect">PORTAL ALIENÍGENA</span></span></h1>
-    <p style="color: #0ff; margin: 5px 0; text-shadow: 0 0 5px #0ff;">Seu repositório interdimensional de imagens!</p>
+    <h1>PORTAL ALIENÍGENA</h1>
+    <p style="color: #0ff; margin: 5px 0;">Seu repositório interdimensional de imagens!</p>
   </div>
   
   <div class="container">
@@ -627,14 +542,6 @@
       visits = visits ? parseInt(visits) + 1 : 1;
       localStorage.setItem('visits', visits);
       visitorCount.textContent = visits.toString().padStart(3, '0');
-      
-      // Efeito especial no contador
-      if (visits % 10 === 0) {
-        visitorCount.style.animation = 'pulse 0.5s 5';
-        setTimeout(() => {
-          visitorCount.style.animation = '';
-        }, 2500);
-      }
     });
 
     // --- FUNÇÃO PARA CARREGAR A GALERIA ---
