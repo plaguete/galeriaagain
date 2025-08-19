@@ -47,22 +47,6 @@ app.get('/api/files', async (req, res) => {
 });
 
 // Rota para EXCLUIR um arquivo (método DELETE)
-app.delete('/api/delete', async (req, res) => {
-  const { url } = req.body;
-
-  if (!url) {
-    return res.status(400).json({ message: 'A URL do arquivo é obrigatória.' });
-  }
-
-  try {
-    await del(url);
-    res.status(200).json({ success: true });
-  } catch (error) {
-    console.error('Erro ao excluir:', error);
-    res.status(500).json({ message: 'Erro ao excluir o arquivo.', error: error.message });
-  }
-});
-
 // Rota para RENOMEAR um arquivo (método POST)
 app.post('/api/rename', async (req, res) => {
   const { url, newFilename } = req.body;
@@ -78,11 +62,12 @@ app.post('/api/rename', async (req, res) => {
       throw new Error(`Falha ao baixar o blob: ${response.statusText}`);
     }
     
-    const blobData = await response.arrayBuffer();
+    const blobData = await response.blob();
     
     // 2. Fazer upload do blob com o novo nome
     const newBlob = await put(newFilename, blobData, {
       access: 'public',
+      contentType: blobData.type,
     });
     
     // 3. Excluir o blob antigo
