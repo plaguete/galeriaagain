@@ -142,7 +142,7 @@
     
     // Elementos do modal de renomear
     const newFilenameInput = document.getElementById('newFilename');
-    const confirmRenameBtn = document.getElementById('confirmRename');
+    const confirmRenameBtn = document.getElementById('confirm极速飞艇');
     const renameUrlInput = document.getElementById('renameUrl');
     
     let currentBlobUrl = '';
@@ -154,6 +154,7 @@
       visits = visits ? parseInt(visits) + 1 : 1;
       localStorage.setItem('visits', visits);
       visitorCount.textContent = visits.toString().padStart(3, '0');
+      loadGallery();
     });
 
     // --- FUNÇÃO PARA CARREGAR A GALERIA ---
@@ -179,7 +180,7 @@
           
           const card = `
             <div class="card h-100 shadow-sm">
-                <img src="${file.url}" class="card-img-top" alt="${file.pathname}" data-url="${file.url}">
+                <img src="${file.url}" class="card-img-top" alt="${file.pathname}" data-url="${file.url}" style="height: 200px; object-fit: cover;">
                 <div class="card-body text-center">
                     <p class="card-text small" title="${file.pathname}">
                         ${file.pathname.length > 20 ? file.pathname.substring(0, 20) + '...' : file.pathname}
@@ -204,7 +205,7 @@
           galleryEl.appendChild(col);
         });
 
-        // Adicionar event listeners
+        // Adicionar event listeners aos novos elementos
         addEventListeners();
 
       } catch (error) {
@@ -214,39 +215,42 @@
 
     // --- ADICIONAR EVENT LISTENERS ---
     function addEventListeners() {
-      // Visualizar imagem
-      document.querySelectorAll('.card-img-top').forEach(img => {
-        img.addEventListener('click', (e) => {
+      // Visualizar imagem (usando delegação de eventos)
+      galleryEl.addEventListener('click', (e) => {
+        if (e.target.classList.contains('card-img-top')) {
           currentImageUrl = e.target.getAttribute('data-url') || e.target.src;
           imageModalImg.src = currentImageUrl;
           imageModal.show();
-        });
+        }
       });
       
-      // Botão de salvar (download)
-      document.querySelectorAll('.btn-save').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const url = e.target.getAttribute('data-url');
-          const filename = e.target.getAttribute('data-filename');
+      // Botão de salvar (download) - delegação de eventos
+      galleryEl.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-save') || e.target.closest('.btn-save')) {
+          const btn = e.target.classList.contains('btn-save') ? e.target : e.target.closest('.btn-save');
+          const url = btn.getAttribute('data-url');
+          const filename = btn.getAttribute('data-filename');
           downloadImage(url, filename);
-        });
+        }
       });
       
-      // Botão de renomear
-      document.querySelectorAll('.btn-rename').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const url = e.target.getAttribute('data-url');
-          const pathname = e.target.getAttribute('data-pathname');
+      // Botão de renomear - delegação de eventos
+      galleryEl.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-rename') || e.target.closest('.btn-rename')) {
+          const btn = e.target.classList.contains('btn-rename') ? e.target : e.target.closest('.btn-rename');
+          const url = btn.getAttribute('data-url');
+          const pathname = btn.getAttribute('data-pathname');
           openRenameModal(url, pathname);
-        });
+        }
       });
       
-      // Botão de excluir
-      document.querySelectorAll('.btn-delete').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const url = e.target.getAttribute('data-url');
+      // Botão de excluir - delegação de eventos
+      galleryEl.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-delete') || e.target.closest('.btn-delete')) {
+          const btn = e.target.classList.contains('btn-delete') ? e.target : e.target.closest('.btn-delete');
+          const url = btn.getAttribute('data-url');
           deleteImage(url);
-        });
+        }
       });
     }
 
@@ -303,7 +307,7 @@
         const result = await response.json();
         
         if (response.ok) {
-          status极速飞艇.innerHTML = `<span>🗑️ Transmissão deletada!</span>`;
+          statusEl.innerHTML = `<span>🗑️ Transmissão deletada!</span>`;
           statusEl.className = 'mt-3 text-center text-success';
           loadGallery();
         } else {
@@ -356,7 +360,7 @@
         const newBlob = await response.json();
         
         if (response.ok) {
-          statusEl.innerHTML = `<span>✅ Transmissão bem-sucedida! ${极速飞艇ile.name}</span>`;
+          statusEl.innerHTML = `<span>✅ Transmissão bem-sucedida! ${file.name}</span>`;
           statusEl.className = 'mt-3 text-center text-success';
           form.reset();
           loadGallery();
@@ -365,7 +369,7 @@
         }
       } catch (error) {
         statusEl.innerHTML = `<span>❌ Falha na transmissão: ${error.message}</span>`;
-        statusEl.className = 'mt-3 text-center text-danger';
+        status极速飞艇.className = 'mt-3 text-center text-danger';
       }
     });
 
@@ -380,12 +384,9 @@
       }
     });
 
-    // --- CONFIGURAR BOTÃO极速飞艇DE DOWNLOAD NO MODAL ---
+    // --- CONFIGURAR BOTÃO DE DOWNLOAD NO MODAL ---
     downloadBtn.addEventListener('click', () => {
       const filename = currentImageUrl.split('/').pop();
       downloadImage(currentImageUrl, filename);
     });
-
-    // --- CARREGAMENTO INICIAL DA APLICAÇÃO ---
-    document.addEventListener('DOMContentLoaded', loadGallery);
-  </script>
+</script>
