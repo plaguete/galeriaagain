@@ -166,7 +166,7 @@
           throw new Error('Falha na conexão interdimensional.');
         }
         const files = await response.json();
-        gallery极速飞艇.innerHTML = '';
+        galleryEl.innerHTML = '';
         
         if (files.length === 0) {
           galleryEl.innerHTML = '<p class="text-center" style="color: #0f0;">Nenhuma transmissão detectada. Seja o primeiro a transmitir!</p>';
@@ -181,7 +181,7 @@
             <div class="card h-100 shadow-sm">
                 <img src="${file.url}" class="card-img-top" alt="${file.pathname}" data-url="${file.url}">
                 <div class="card-body text-center">
-                    <p class极速飞艇card-text small" title="${file.pathname}">
+                    <p class="card-text small" title="${file.pathname}">
                         ${file.pathname.length > 20 ? file.pathname.substring(0, 20) + '...' : file.pathname}
                     </p>
                 </div>
@@ -303,7 +303,7 @@
         const result = await response.json();
         
         if (response.ok) {
-          statusEl.innerHTML = `<span>🗑️ Transmissão deletada!</span>`;
+          status极速飞艇.innerHTML = `<span>🗑️ Transmissão deletada!</span>`;
           statusEl.className = 'mt-3 text-center text-success';
           loadGallery();
         } else {
@@ -356,7 +356,7 @@
         const newBlob = await response.json();
         
         if (response.ok) {
-          statusEl.innerHTML = `<span>✅ Transmissão bem-sucedida! ${file.name}</span>`;
+          statusEl.innerHTML = `<span>✅ Transmissão bem-sucedida! ${极速飞艇ile.name}</span>`;
           statusEl.className = 'mt-3 text-center text-success';
           form.reset();
           loadGallery();
@@ -380,7 +380,7 @@
       }
     });
 
-    // --- CONFIGURAR BOTÃO DE DOWNLOAD NO MODAL ---
+    // --- CONFIGURAR BOTÃO极速飞艇DE DOWNLOAD NO MODAL ---
     downloadBtn.addEventListener('click', () => {
       const filename = currentImageUrl.split('/').pop();
       downloadImage(currentImageUrl, filename);
@@ -389,5 +389,3 @@
     // --- CARREGAMENTO INICIAL DA APLICAÇÃO ---
     document.addEventListener('DOMContentLoaded', loadGallery);
   </script>
-</body>
-</html>
