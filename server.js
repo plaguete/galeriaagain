@@ -46,6 +46,24 @@ app.get('/api/files', async (req, res) => {
   }
 });
 
+
+// Add this route before the static file serving
+app.delete('/api/delete', async (req, res) => {
+  const { url } = req.body;
+
+  if (!url) {
+    return res.status(400).json({ message: 'A URL do arquivo é obrigatória.' });
+  }
+
+  try {
+    await del(url);
+    res.status(200).json({ message: 'Arquivo excluído com sucesso.' });
+  } catch (error) {
+    console.error('Erro ao excluir arquivo:', error);
+    res.status(500).json({ message: 'Erro ao excluir o arquivo.', error: error.message });
+  }
+});
+
 // Rota para EXCLUIR um arquivo (método DELETE)
 // Rota para RENOMEAR um arquivo (método POST)
 app.post('/api/rename', async (req, res) => {
@@ -88,3 +106,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
