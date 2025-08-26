@@ -79,48 +79,49 @@
   </div>
   
   <!-- Modal para visualização de imagem -->
-  <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">VISUALIZAÇÃO INTERDIMENSIONAL</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <img src="" alt="Imagem ampliada">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="downloadBtn">
-            <i class="fas fa-download"></i> SALVAR NO DISPOSITIVO TERRESTRE
-          </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR PORTAL</button>
-        </div>
+  <!-- Replace the image modal with this centered version -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">VISUALIZAÇÃO INTERDIMENSIONAL</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="" alt="Imagem ampliada" class="img-fluid">
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" id="downloadBtn">
+          <i class="fas fa-download"></i> SALVAR NO DISPOSITIVO TERRESTRE
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR PORTAL</button>
       </div>
     </div>
   </div>
-  
-  <!-- Modal para renomear -->
-  <div class="modal fade" id="renameModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">RENOMEAR TRANSMISSÃO</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<!-- Replace the rename modal with this centered version -->
+<div class="modal fade" id="renameModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">RENOMEAR TRANSMISSÃO</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="newFilename" class="form-label">Novo código de identificação:</label>
+          <input type="text" class="form-control" id="newFilename" placeholder="Digite o novo identificador com extensão">
         </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="newFilename" class="form-label">Novo código de identificação:</label>
-            <input type="text" class="form-control" id="newFilename" placeholder="Digite o novo identificador com extensão">
-          </div>
-          <input type="hidden" id="renameUrl">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn-save" id="confirmRename">Salvar</button>
-        </div>
+        <input type="hidden" id="renameUrl">
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="confirmRename">Salvar</button>
       </div>
     </div>
   </div>
+</div>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -217,12 +218,14 @@
       function addEventListeners() {
         // Visualizar imagem (usando delegação de eventos)
         galleryEl.addEventListener('click', (e) => {
-          if (e.target.classList.contains('card-img-top')) {
-            currentImageUrl = e.target.getAttribute('data-url') || e.target.src;
-            imageModalImg.src = currentImageUrl;
-            imageModal.show();
-          }
-        });
+        if (e.target.classList.contains('card-img-top') || e.target.closest('.card-img-top')) {
+          const imgElement = e.target.classList.contains('card-img-top') ? e.target : e.target.closest('.card-img-top');
+          currentImageUrl = imgElement.getAttribute('data-url') || imgElement.src;
+          imageModalImg.src = currentImageUrl;
+          imageModalImg.alt = imgElement.alt;
+          imageModal.show();
+        }
+      });
         
         // Botão de salvar (download) - delegação de eventos
         galleryEl.addEventListener('click', (e) => {

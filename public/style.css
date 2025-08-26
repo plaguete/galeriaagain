@@ -371,8 +371,31 @@
    font-family: 'VT323', monospace !important;
  }
  
+  .modal {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-dialog {
+    margin: 0 auto;
+    max-width: 90%;
+  }
+
+  #imageModal .modal-dialog {
+    max-width: 80%;
+  }
+
+  #renameModal .modal-dialog {
+    max-width: 500px;
+  }
+
+  .modal-content {
+    margin: 0 auto;
+  }
  /* Modal de imagem */
  .modal-content {
+   margin: 0 auto;
    background: #000;
    border: 5px double #0f0;
    color: #0f0;
