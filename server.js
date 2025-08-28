@@ -11,12 +11,18 @@ dotenv.config();
 const app = express();
 
 // Middleware para parsear JSON e dados brutos
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // Permite todas as origens (ajuste para produção!)
+  res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS'); // Inclua OPTIONS para preflight
+  res.header('Access-Control-Allow-Headers', 'Content-Type, x-vercel-filename, Authorization'); // Headers permitidos
+  next();
+});
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.raw({ 
   type: ['image/*', 'application/octet-stream'], 
   limit: '10mb' 
 }));
-
 // --- 3. Definição das Rotas da API ---
 
 // Rota para UPLOAD de arquivos (método POST)
