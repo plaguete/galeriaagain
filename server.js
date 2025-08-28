@@ -26,6 +26,7 @@ app.post('/api/upload', async (req, res) => {
   try {
     const blob = await put(filename, req, {
       access: 'public',
+      contentType: req.headers['content-type'] // Adiciona o tipo de conteúdo
     });
 
     res.status(200).json(blob);
@@ -46,8 +47,7 @@ app.get('/api/files', async (req, res) => {
   }
 });
 
-
-// Add this route before the static file serving
+// Rota para EXCLUIR um arquivo (método DELETE)
 app.delete('/api/delete', async (req, res) => {
   const { url } = req.body;
 
@@ -64,8 +64,7 @@ app.delete('/api/delete', async (req, res) => {
   }
 });
 
-// Rota para EXCLUIR um arquivo (método DELETE)
-// Rota para RENOMEAR um arquivo (método POST)
+// Rota para RENOMEAR um arquivo (método POST) - CORRIGIDA
 app.post('/api/rename', async (req, res) => {
   const { url, newFilename } = req.body;
 
@@ -80,12 +79,17 @@ app.post('/api/rename', async (req, res) => {
       throw new Error(`Falha ao baixar o blob: ${response.statusText}`);
     }
     
-    const blobData = await response.blob();
+    // Obter o tipo de conteúdo do cabeçalho da resposta
+    const contentType = response.headers.get('content-type');
+    
+    // Obter os dados como ArrayBuffer
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
     
     // 2. Fazer upload do blob com o novo nome
-    const newBlob = await put(newFilename, blobData, {
+    const newBlob = await put(newFilename, buffer, {
       access: 'public',
-      contentType: blobData.type,
+      contentType: contentType // Definir o tipo de conteúdo corretamente
     });
     
     // 3. Excluir o blob antigo
@@ -106,4 +110,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
-
