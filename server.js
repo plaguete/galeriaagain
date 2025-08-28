@@ -5,7 +5,6 @@ const express = require('express');
 const { put, list, del } = require('@vercel/blob');
 const dotenv = require('dotenv');
 const path = require('path');
-const fetch = require('node-fetch'); // Adicionando importação do fetch
 
 // --- 2. Configuração Inicial ---
 dotenv.config();
